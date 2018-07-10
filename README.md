@@ -7,7 +7,7 @@ Browser-side logging for SPAs, logs in console by default. In `logstash` mode it
 Add the module to your dependencies using yarn
 
 ```bash
-yarn add git ssh://git@rulsoft:11022/rulsoft/browser-logger.git
+yarn add git https://github.com/Colour-Full/react-browser-logger.git
 ```
 
 ## How to use the logger 

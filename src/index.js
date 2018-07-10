@@ -1,7 +1,9 @@
 import assert from 'assert'
-import { createLogger, ConsoleFormattedStream } from 'browser-bunyan'
-import { isString, isObject } from 'lodash/fp'
-import { detect } from 'detect-browser'
+import { createLogger } from 'browser-bunyan'
+import { ConsoleRawStream } from '@browser-bunyan/console-raw-stream'
+import isObject from 'lodash/fp/isObject'
+import isString from 'lodash/fp/isString'
+import { detect as detectBrowser } from 'detect-browser'
 
 export const detectBrowser = detect
 
@@ -73,7 +75,7 @@ const Logger = (name, mode = Modes.console, level = Levels.warn, options = {}) =
       const stream = logstashClientTransport(options.logstashHost)
       return stream
     }
-    const stream = new ConsoleFormattedStream()
+    const stream = new ConsoleRawStream()
     return stream
   }
   return createLogger({
