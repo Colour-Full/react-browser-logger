@@ -5,8 +5,6 @@ import isObject from 'lodash/fp/isObject'
 import isString from 'lodash/fp/isString'
 import { detect as detectBrowser } from 'detect-browser'
 
-export const detectBrowser = detect
-
 export const browserSerializer = (browser) => {
   const info = {
     browserName: browser.name,
@@ -88,8 +86,10 @@ const Logger = (name, mode = Modes.console, level = Levels.warn, options = {}) =
       }
     ],
     serializers: {
+      browser: browserSerializer,
       ...options.serializers}
-  })
+  }),
+  browser: detectBrowser()
 }
 
 export default Logger

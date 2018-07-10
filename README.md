@@ -46,13 +46,13 @@ log.info({req: <request object>}, 'something about handling this request')
 The logger comes with browser serializer that uses the `detect-browser` npm module and will log the browser name, version and OS, out of the box. You can use it like this:
 
 ```js
-import Logger, { browserSerializer, detectBrowser } from 'rulsoft-browser-logger'
+import Logger from 'rulsoft-browser-logger'
 
 // define your logger
-const logger = Logger(serviceName, 'console', 'info', {serializers: { browser: browserSerializer })
+const logger = Logger(serviceName, 'console', 'info'}
 
-// Use detect browser
-const browser = detectBrowser()
+// You can access the browser data from the logger by using
+const browser = logger.browser
 
 // And then in your logger pass the browser object like this
 logger.info({browser: browser}, 'Some info with browser details')
