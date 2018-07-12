@@ -7,7 +7,7 @@ Browser-side logging for SPAs, logs in console by default. In `logstash` mode it
 Add the module to your dependencies using yarn
 
 ```bash
-yarn add git https://github.com/Colour-Full/react-browser-logger.git
+yarn add https://github.com/Colour-Full/react-browser-logger.git
 ```
 
 ## How to use the logger 
@@ -49,7 +49,7 @@ The logger comes with browser serializer that uses the `detect-browser` npm modu
 import Logger from 'rulsoft-browser-logger'
 
 // define your logger
-const logger = Logger(serviceName, 'console', 'info'}
+const logger = Logger(serviceName, 'console', 'info')
 
 // You can access the browser data from the logger by using
 const browser = logger.browser

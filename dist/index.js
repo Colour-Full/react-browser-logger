@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Levels = exports.Modes = exports.logstashClientTransport = exports.browserSerializer = exports.detectBrowser = undefined;
+exports.Levels = exports.Modes = exports.logstashClientTransport = exports.browserSerializer = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -13,13 +13,19 @@ var _assert2 = _interopRequireDefault(_assert);
 
 var _browserBunyan = require('browser-bunyan');
 
-var _fp = require('lodash/fp');
+var _consoleRawStream = require('@browser-bunyan/console-raw-stream');
+
+var _isObject = require('lodash/fp/isObject');
+
+var _isObject2 = _interopRequireDefault(_isObject);
+
+var _isString = require('lodash/fp/isString');
+
+var _isString2 = _interopRequireDefault(_isString);
 
 var _detectBrowser = require('detect-browser');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var detectBrowser = exports.detectBrowser = _detectBrowser.detect;
 
 var browserSerializer = exports.browserSerializer = function browserSerializer(browser) {
   var info = {
@@ -87,19 +93,19 @@ var Logger = function Logger(name) {
 
   (0, _assert2.default)(isValidMode(mode), 'Invalid logger mode');
   (0, _assert2.default)(isValidLevel(level), 'Invalid logger level');
-  (0, _assert2.default)((0, _fp.isString)(name), 'Invalid logger name');
+  (0, _assert2.default)((0, _isString2.default)(name), 'Invalid logger name');
   if (options.logstashHost) {
-    (0, _assert2.default)((0, _fp.isString)(options.logstashHost), 'Invalid logstashHost property in Logger options');
+    (0, _assert2.default)((0, _isString2.default)(options.logstashHost), 'Invalid logstashHost property in Logger options');
   }
   if (options.serializers) {
-    (0, _assert2.default)((0, _fp.isObject)(options.serializers), 'Invalid serializers property in Logger options');
+    (0, _assert2.default)((0, _isObject2.default)(options.serializers), 'Invalid serializers property in Logger options');
   }
   var setStream = function setStream(mode) {
     if (mode !== 'console') {
       var _stream = logstashClientTransport(options.logstashHost);
       return _stream;
     }
-    var stream = new _browserBunyan.ConsoleFormattedStream();
+    var stream = new _consoleRawStream.ConsoleRawStream();
     return stream;
   };
   return (0, _browserBunyan.createLogger)({
@@ -109,7 +115,10 @@ var Logger = function Logger(name) {
       level: level,
       stream: setStream(mode)
     }],
-    serializers: _extends({}, options.serializers)
+    serializers: _extends({
+      browser: browserSerializer
+    }, options.serializers),
+    browser: (0, _detectBrowser.detect)()
   });
 };
 

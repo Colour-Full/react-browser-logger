@@ -87,9 +87,10 @@ const Logger = (name, mode = Modes.console, level = Levels.warn, options = {}) =
     ],
     serializers: {
       browser: browserSerializer,
-      ...options.serializers}
-  }),
-  browser: detectBrowser()
+      ...options.serializers
+    },
+    browser: detectBrowser()
+  })
 }
 
 export default Logger
