@@ -1,6 +1,6 @@
-# Browser-side logger
+# Browser logger
 
-Browser-side logging for SPAs, logs in console by default. In `logstash` mode it will send the logs to Kibana via logstash
+Browser logging for SPAs, logs in console by default. In `logstash` mode it will send the logs to Kibana via logstash
 
 ### Installing
 
@@ -15,7 +15,7 @@ yarn add https://github.com/Colour-Full/react-browser-logger.git
 Import the logger in your app 
 
 ```js
-import Logger from 'rulsoft-browser-logger'
+import Logger from 'react-browser-logger'
 ```
 ## Setting up your logger
 
@@ -46,7 +46,7 @@ log.info({req: <request object>}, 'something about handling this request')
 The logger comes with browser serializer that uses the `detect-browser` npm module and will log the browser name, version and OS, out of the box:
 
 ```js
-import Logger from 'rulsoft-browser-logger'
+import Logger from 'react-browser-logger'
 
 // define your logger
 const logger = Logger(serviceName, 'console', 'info')
@@ -69,7 +69,7 @@ logger.info('Some info with browser details')
 You can override the default browser serializer or you can write your own serializers like this:
 
 ```js
-import Logger from 'rulsoft-browser-logger'
+import Logger from 'react-browser-logger'
 
 const someUser = {
 // Some object containig data for a user that you want to log
